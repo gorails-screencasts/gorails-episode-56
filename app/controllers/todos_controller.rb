@@ -64,7 +64,8 @@ class TodosController < ApplicationController
   def complete
     completed_at = @todo.completed? ? nil : Time.zone.now
     @todo.update(completed_at: completed_at)
-    render json: {success: true}
+
+    render json: { id: @todo.id, completed: @todo.completed?, description: @todo.description }
   end
 
   private

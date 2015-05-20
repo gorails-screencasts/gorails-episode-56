@@ -1,3 +1,14 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+jQuery ->
+  $("input[type='checkbox']").on "click", (e) ->
+    id = $(this).data("id")
+
+    $.ajax(
+      url: "/todos/#{id}/complete",
+      method: "PATCH"
+      dataType: "JSON"
+      success: (data) =>
+        if data.completed
+          $(this).next().html "<del>#{data.description}</del>"
+        else
+          $(this).next().html data.description
+    )
