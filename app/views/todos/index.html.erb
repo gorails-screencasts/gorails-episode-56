@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Todos</h1>
+
+<ul>
+  <% @todos.each do |todo| %>
+    <li>
+      <span>
+        <% if todo.completed? %>
+          <del><%= todo.description %></del>
+        <% else %>
+          <%= todo.description %>
+        <% end %>
+      </span>
+    </li>
+  <% end %>
+</ul>
+
+<br>
+
+<%= link_to 'New Todo', new_todo_path %>
