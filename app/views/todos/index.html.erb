@@ -4,8 +4,8 @@
 
 <ul>
   <% @todos.each do |todo| %>
-    <li>
-      <%= check_box_tag :complete, 1, todo.completed?, data: { id: todo.id } %>
+    <li data-id="<%= todo.id %>">
+      <%= check_box_tag :complete, 1, todo.completed? %>
       <span>
         <% if todo.completed? %>
           <del><%= todo.description %></del>
