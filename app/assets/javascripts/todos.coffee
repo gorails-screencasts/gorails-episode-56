@@ -1,3 +1,9 @@
+class TodoList
+  constructor: (item) ->
+    @item = $(item)
+    @todos = $.map @item.find("[data-behavior='todo']"), (item, i) ->
+      new Todo(item)
+
 class Todo
   constructor: (item) ->
     @item = $(item)
@@ -5,7 +11,7 @@ class Todo
     @setEvents()
 
   setEvents: ->
-    @item.children("input[type='checkbox']").on "click", @handleToggle
+    @item.find("[data-behavior='todo-toggle']").on "click", @handleToggle
 
   handleToggle: =>
     $.ajax(
@@ -17,10 +23,9 @@ class Todo
 
   handleToggleSuccess: (data) =>
     if data.completed
-      @item.children("span").html "<del>#{data.description}</del>"
+      @item.find("[data-behavior='todo-description']").html "<del>#{data.description}</del>"
     else
-      @item.children("span").html data.description
+      @item.find("[data-behavior='todo-description']").html data.description
 
 jQuery ->
-  todos = $.map $("li"), (item, i) ->
-    new Todo(item)
+  new TodoList $("[data-behavior='todo-list']")

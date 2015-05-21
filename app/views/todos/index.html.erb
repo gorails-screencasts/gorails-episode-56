@@ -1,21 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Todos</h1>
+<div data-behavior="todo-list">
+  <h1>5 Incomplete Todos</h1>
 
-<ul>
-  <% @todos.each do |todo| %>
-    <li data-id="<%= todo.id %>">
-      <%= check_box_tag :complete, 1, todo.completed? %>
-      <span>
-        <% if todo.completed? %>
-          <del><%= todo.description %></del>
-        <% else %>
-          <%= todo.description %>
-        <% end %>
-      </span>
-    </li>
-  <% end %>
-</ul>
+  <ul>
+    <% @todos.each do |todo| %>
+      <li data-behavior="todo" data-id="<%= todo.id %>">
+        <%= check_box_tag :complete, 1, todo.completed?, data: { behavior: "todo-toggle" } %>
+        <span data-behavior="todo-description">
+          <% if todo.completed? %>
+            <del><%= todo.description %></del>
+          <% else %>
+            <%= todo.description %>
+          <% end %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
 <br>
 
